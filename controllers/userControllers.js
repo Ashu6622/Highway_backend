@@ -77,8 +77,8 @@ const registerUser = async (req, res, next)=>{
 
             const {email, name, birthday, otp} = req.body;
             // console.log(otp);
-            if(otp != otpStore[email].otp){
-                return res.json({message:'Otp not Matched', status:400});
+            if(!otpStore[email] || otp != otpStore[email].otp){
+                return res.json({message:'Otp not Matched or Expired', status:400});
             }
         
 
@@ -117,8 +117,8 @@ const loginUser = async (req, res, next)=>{
 
         const {email, otp} = req.body;
 
-        if(otp != otpStore[email].otp){
-            return res.json({message:'Otp not Matched', status:400});
+        if(!otpStore[email] || otp != otpStore[email].otp){
+            return res.json({message:'Otp not Matched or Expired', status:400});
         }
 
         // check if the email is present or not
