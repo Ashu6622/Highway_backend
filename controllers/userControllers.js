@@ -101,7 +101,12 @@ const registerUser = async (req, res, next)=>{
 
         const token = generateToken({id:newUser._id});
 
-       return res.cookie('token', token, {httpOnly:true, maxAge:600*1000}).status(201).json({message:'Successfully Login', status:201});
+       return res.cookie('token', token, {
+           httpOnly: true,
+           maxAge: 600*1000,
+           sameSite: 'lax',
+           secure: false
+       }).status(201).json({message:'Successfully Login', status:201});
 
     }
     catch(error){
@@ -130,7 +135,12 @@ const loginUser = async (req, res, next)=>{
 
         const token = generateToken({id:userExit._id});
 
-        return res.cookie('token', token, {httpOnly:true, maxAge:600*1000}).status(200).json({message:'Successfully Login', status:200});
+        return res.cookie('token', token, {
+            httpOnly: true,
+            maxAge: 600*1000,
+            sameSite: 'lax',
+            secure: false
+        }).status(200).json({message:'Successfully Login', status:200});
     }
     catch(error){
         next(error);
@@ -138,18 +148,6 @@ const loginUser = async (req, res, next)=>{
 
 }
 
-// const resendOtp = (req, res, next)=>{
-
-//     try{
-
-//         const {email} = req.body;
-
-//     }
-//     catch(error){
-//         next(error);
-//     }
-
-// }
 
 const isLoggedIn = async (req, res, next)=>{
 
