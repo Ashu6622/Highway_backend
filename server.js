@@ -8,7 +8,7 @@ const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'],
+  origin: ['https://highwaydel.netlify.app', 'http://localhost:5173', 'http://localhost:5174'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
